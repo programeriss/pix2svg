@@ -1,0 +1,39 @@
+{
+  "name": "programeriss/pix2svg",
+  "type": "library",
+  "description": "Convert image to the SVG format",
+  "keywords": [
+    "programeriss",
+    "pix2svg",
+    "image-to-svg",
+    "svg",
+    "convert",
+    "image"
+  ],
+  "homepage": "https://github.com/programeriss/pix2svg",
+  "license": "MIT",
+  "authors": [    {
+      "name": "Aidas Eglinskas",
+      "email": "programeriss@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Programeriss\\Pix2svg\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Programeriss\\Pix2svg\\Test\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
+}
