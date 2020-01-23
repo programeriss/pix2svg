@@ -20,7 +20,7 @@ composer require programeriss/pix2svg
 Converting a image to the svg is easy.
 
 ```php
-$pix2svg = new Programeriss\Pix2svg\Pix2svgInterface();
+$pix2svg = new Programeriss\Pix2svg\Pix2svg();
 $svg = $pix2svg->convert($pathToImage);
 ```
 
