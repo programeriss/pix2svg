@@ -25,7 +25,7 @@ $svg = $pix2svg->convert($pathToImage);
 ```
 
 If the path you pass to `convert` has the extensions `jpg`, `jpeg`, `gif`, or `png` the image will be returned in the svg format.
-Otherwise the output will be a jpg.
+Otherwise the output will be a error.
 
 ## Testing
 
