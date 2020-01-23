@@ -8,7 +8,6 @@ use InvalidArgumentException;
 
 class Pix2svg
 {
-	protected $pathToImage;
 	protected $image;
 	protected $width;
 	protected $height;
@@ -16,15 +15,27 @@ class Pix2svg
 	
 	public function convert($pathToImage)
 	{
-		$this->pathToImage = $pathToImage;
-		
 		$fgc = file_get_contents($pathToImage);
 		$this->image  = imagecreatefromstring($fgc);
 		$this->width  = imagesx($this->image);
 		$this->height = imagesy($this->image);
 		
-		$svgh = $this->generateSvg(true);
-		$svg  = $this->generateSvg(false);
+		$svgh = $this->createSvgDocument();
+		for ($y = 0; $y < $this->height; ++$y) {
+			$number_of_consecutive_pixels = 1;
+			for ($x = 0; $x < $this->width; $x = $x + $number_of_consecutive_pixels) {
+				$number_of_consecutive_pixels = $this->createLine($svgh, $x, $y, true);
+			}
+		}
+		
+		$svg = $this->createSvgDocument();
+		for ($x = 0; $x < $this->width; ++$x) {
+			$number_of_consecutive_pixels = 1;
+			for ($y = 0; $y < $this->height; $y = $y + $number_of_consecutive_pixels) {
+				$number_of_consecutive_pixels = $this->createLine($svg, $x, $y, false);
+			}
+		}
+		
 		if ($svgh->getElementsByTagName('rect')->length < $svg->getElementsByTagName('rect')->length) {
 			$svg = $svgh;
 		}
@@ -53,28 +64,6 @@ class Pix2svg
 		$dom->documentElement->setAttribute('viewBox', '0 0 '.$this->width.' '.$this->height);
 		
 		return $dom;
-	}
-	
-	private function generateSvg($action)
-	{
-		$svg = $this->createSvgDocument();
-		if ($action == 1) {
-			for ($y = 0; $y < $this->height; ++$y) {
-				$number_of_consecutive_pixels = 1;
-				for ($x = 0; $x < $this->width; $x = $x + $number_of_consecutive_pixels) {
-					$number_of_consecutive_pixels = $this->createLine($svg, $x, $y, $action);
-				}
-			}
-		} else {
-			for ($x = 0; $x < $this->width; ++$x) {
-				$number_of_consecutive_pixels = 1;
-				for ($y = 0; $y < $this->height; $y = $y + $number_of_consecutive_pixels) {
-					$number_of_consecutive_pixels = $this->createLine($svg, $x, $y, $action);
-				}
-			}
-		}
-		
-		return $svg;
 	}
 	
 	private function createLine(DOMDocument $svg, $x, $y, $action)
