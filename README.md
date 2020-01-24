@@ -6,7 +6,7 @@ This package provides an easy to work with class to convert image's to svg.
 
 ## Requirements
 
-You should have [Imagick](http://php.net/manual/en/imagick.setresolution.php) and [Ghostscript](http://www.ghostscript.com/) installed.
+-
 
 ## Installation
 
