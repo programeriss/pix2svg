@@ -4,10 +4,6 @@
 
 This package provides an easy to work with class to convert image's to svg.
 
-## Requirements
-
--
-
 ## Installation
 
 The package can be installed via composer:
